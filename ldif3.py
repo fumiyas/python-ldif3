@@ -123,6 +123,8 @@ class LDIFWriter(object):
 
     def _unparse_attr(self, attr_type, attr_value):
         """Write a single attribute type/value pair."""
+        if not isinstance(attr_value, (str, bytes)):
+            attr_value = str(attr_value)
         if self._needs_base64_encoding(attr_type, attr_value):
             if not isinstance(attr_value, bytes):
                 attr_value = attr_value.encode(self._encoding)
